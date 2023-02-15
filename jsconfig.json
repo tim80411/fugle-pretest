@@ -1,0 +1,16 @@
+// js run ts檢驗的設定 https://juejin.cn/post/6930549887402672135
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "baseUrl": ".", // 用於解析非相關模塊名稱的基目錄
+    "checkJs": true,
+    "module": "commonJS",
+    "moduleResolution": "node",
+  },
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
