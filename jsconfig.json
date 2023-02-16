@@ -7,9 +7,6 @@
     "module": "commonJS",
     "moduleResolution": "node",
   },
-  "include": [
-    "."
-  ],
   "exclude": [
     "node_modules"
   ]
