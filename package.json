@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_PATH=. NODE_ENV=dev pm2 start ecosystem.config.js --only dev-app && pm2 logs dev-app --raw",
+    "start:dev": "NODE_PATH=. NODE_ENV=dev pm2 start ecosystem.config.js --only dev-app && pm2 logs dev-app --raw | pino-pretty",
     "stop:dev": "pm2 stop dev-app && pm2 delete dev-app",
+    "log:dev": "pm2 logs dev-app --raw | pino-pretty",
     "lint": "npx eslint --fix --ignore-path .gitignore .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

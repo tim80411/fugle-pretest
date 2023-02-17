@@ -1,0 +1,24 @@
+{
+  // 使用 IntelliSense 以得知可用的屬性。
+  // 暫留以檢視現有屬性的描述。
+  // 如需詳細資訊，請瀏覽: https://go.microsoft.com/fwlink/?linkid=830387
+  // attach 如果出現9229 is already in use 錯誤，參考https://github.com/microsoft/vscode/issues/73818
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to Process",
+      "type": "node",
+      "request": "attach",
+      "processId": "${command:PickProcess}",
+      "restart": true,
+    },
+    // how to set up debugger with pm2: https://stackoverflow.com/questions/29900253/debug-application-which-is-run-using-pm2z
+    {
+      "name": "Attach to pm2",
+      "type": "node",
+      "request": "attach",
+      "restart": true,
+      "port": 9331,
+    }
+  ]
+}
