@@ -12,6 +12,7 @@ const initRoute = require('src/routes/entry');
 const errorHandler = require('server/main/middleware/errorHandler');
 const resHandler = require('server/main/middleware/resHandler');
 const joiErrorHandler = require('server/main/middleware/joiErrorHandler');
+const ipRateLimiter = require('server/main/middleware/IpRateLimiter');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(helmet.default());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(ipRateLimiter);
 initRoute(app);
 app.use(joiErrorHandler);
 app.use(errorHandler);
