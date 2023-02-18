@@ -3,7 +3,7 @@ const logger = require('lib/basic/Logger');
 const appDefs = {
   dev: {
     suffix: 'dev',
-    node_args: ['--inspect'],
+    node_args: ['--inspect=9331'],
   },
 };
 
