@@ -1,6 +1,10 @@
 {
   "cSpell.words": [
     "autorestart",
-    "Fugle"
+    "Bistamp",
+    "Fugle",
+    "OHLC",
+    "zadd",
+    "zremrangebyscore"
   ]
 }
