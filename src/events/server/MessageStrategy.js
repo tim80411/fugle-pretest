@@ -29,6 +29,9 @@ class MessageStrategy {
   // 請以type作為方法的命名
   subscribe() {
     const self = this;
+    const {
+      server, ws, pair, clientId,
+    } = self;
     const sendData = {
       event: 'bts:subscribe',
       data: {
@@ -36,16 +39,12 @@ class MessageStrategy {
       },
     };
     // add subscribers
-    if (self.server.subscriptions.has(self.pair)) {
-      const pairSubscribers = self.server.subscriptions.get(self.pair);
-      pairSubscribers.push(self.ws);
-      self.server.subscriptions.set(self.pair, pairSubscribers);
-    } else {
-      self.server.subscriptions.set(self.pair, [self.ws]);
-    }
+    WsService.subScribe({
+      server, ws, pair, clientId,
+    });
 
-    self.server.bitStampConnection.send(JSON.stringify(sendData));
-    self.ws.send(`Success subscribe: ${self.pair}`);
+    server.bitStampConnection.send(JSON.stringify(sendData));
+    ws.send(`Success subscribe: ${pair}`);
   }
 
   unsubscribe() {

@@ -45,6 +45,30 @@ class WsService {
       });
     }
   }
+
+  /**
+   * 訂閱
+   * @param {Object} param root
+   * @param {WsServer} param.server WsServer
+   * @param {Object} param.ws ws connection to client
+   * @param {String} param.pair bitstamp pair, [ref](https://www.bitstamp.net/websocket/v2/)
+   * @param {String} param.clientId uuid with prefix `ws`
+   */
+  static subScribe({
+    server, ws, pair, clientId,
+  }) {
+    if (!server.subscriptions.has(pair)) {
+      server.subscriptions.set(pair, [ws]);
+      return;
+    }
+
+    const pairSubscribers = server.subscriptions.get(pair);
+    const isWsExists = pairSubscribers.some((item) => item.uniqClientId === clientId);
+    if (isWsExists) return;
+
+    pairSubscribers.push(ws);
+    server.subscriptions.set(pair, pairSubscribers);
+  }
 }
 
 module.exports = WsService;
