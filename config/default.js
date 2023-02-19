@@ -6,4 +6,10 @@ module.exports = {
   port: {
     redis: 6379,
   },
+  ws: {
+    tickerTTL: 60,
+  },
+  address: {
+    bitStamp: 'wss://ws.bitstamp.net.',
+  },
 };

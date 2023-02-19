@@ -13,6 +13,8 @@ module.exports = {
     'max-len': ['error', { code: 140, ignoreComments: true }],
     'import/no-extraneous-dependencies': ['error', { packageDir: __dirname }],
     'consistent-return': 'off',
+    'no-param-reassign': ['error', { props: false }],
+    'no-restricted-syntax': 'off',
   },
   settings: { // 設定require時能判斷path起始是由哪裡開始
     'import/resolver': {

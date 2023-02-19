@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_PATH=. NODE_ENV=dev pm2 start ecosystem.config.js --only dev-app && pm2 logs dev-app --raw | pino-pretty",
+    "start:dev": "NODE_PATH=. NODE_ENV=dev pm2 start ecosystem.config.js --only dev-app && pm2 logs dev-app --raw",
     "stop:dev": "pm2 stop dev-app && pm2 delete dev-app",
-    "log:dev": "pm2 logs dev-app --raw | pino-pretty",
+    "log:dev": "pm2 logs dev-app --raw",
     "lint": "npx eslint --fix --ignore-path .gitignore .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,7 +30,10 @@
     "ioredis": "^5.3.1",
     "joi": "^17.7.1",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "pino": "^8.10.0",
-    "rate-limit-redis": "^3.0.1"
+    "rate-limit-redis": "^3.0.1",
+    "uuid": "^9.0.0",
+    "ws": "^8.12.1"
   }
 }
