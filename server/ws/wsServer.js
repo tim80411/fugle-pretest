@@ -39,9 +39,8 @@ class WsServer {
 
       // 取得回傳的type
       const jsonData = JSON.parse(parseData);
-      const { data: ticker, channel } = jsonData;
 
-      await BistampService.handleTicker({ server: this, channel, ticker });
+      await BistampService.handleTicker({ server: this, jsonData });
     });
 
     // open

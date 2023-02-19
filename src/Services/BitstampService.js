@@ -9,8 +9,8 @@ class BistampService {
     return currPrice || prevPrice;
   }
 
-  static getOHLC(strTickers) {
-    const tickers = strTickers.map((item) => JSON.parse(item));
+  static getOHLC(strJSONs) {
+    const tickers = strJSONs.map((item) => JSON.parse(item));
     const defaultValue = {
       inMinute: {
         oldestPrice: 0,
@@ -21,7 +21,7 @@ class BistampService {
     };
 
     const ret = tickers.reduce((prev, curr, index, array) => {
-      const currPrice = curr.price;
+      const currPrice = curr.data.price;
       const {
         latestPrice, highestPrice, oldestPrice, lowestPrice,
       } = prev.inMinute;
@@ -37,7 +37,8 @@ class BistampService {
     return ret;
   }
 
-  static async handleTicker({ server, channel, ticker }) {
+  static async handleTicker({ server, jsonData }) {
+    const { data: ticker, channel } = jsonData;
     if (!channel) return;
     if (_.isEmpty(ticker)) return;
 
@@ -50,13 +51,13 @@ class BistampService {
     const minuteAgo = moment().subtract(1, 'minute').valueOf();
 
     // get minute range data and combine with OHLC info
-    await redis.zadd(pair, now, JSON.stringify(ticker));
+    await redis.zadd(pair, now, JSON.stringify(jsonData));
     const strTickers = await redis.zrangebyscore(pair, minuteAgo, now);
     logger.debug({ msg: 'Get range tickers', strTickers });
     redis.zremrangebyscore(pair, '-inf', minuteAgo);
     const OHLC = BistampService.getOHLC(strTickers);
     const finalData = {
-      ...ticker,
+      ...jsonData,
       ...OHLC,
     };
     clients.forEach((client) => {

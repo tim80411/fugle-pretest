@@ -22,7 +22,6 @@ class ApiServer {
     this.server = createServer(app);
     this.server.listen(this.port, () => {
       logger.info({ msg: `Start listen on port: ${this.port}` });
-
     });
   }
 
