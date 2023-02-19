@@ -15,7 +15,7 @@ function handleQuit(wsServer) {
   });
 }
 
-const PORT = process.env.PORT || 3566;
+const PORT = process.env.PORT || 3000;
 const apiServer = new ApiServer(PORT);
 const wsServer = new WsServer();
 
