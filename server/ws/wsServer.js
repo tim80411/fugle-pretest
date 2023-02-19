@@ -9,11 +9,12 @@ const BistampService = require('src/Services/BitstampService');
 const ServerMessageStrategy = require('src/events/server/MessageStrategy');
 
 class WsServer {
-  constructor() {
+  constructor(apiServer) {
     this.server = null;
     this.bitStampConnection = null;
     this.clients = new Map();
     this.subscriptions = new Map();
+    this.apiServer = apiServer;
 
     this.createServer();
     this.createBitStampConnection();
@@ -22,7 +23,7 @@ class WsServer {
   }
 
   createServer() {
-    this.server = new Websocket.WebSocketServer(config.ws.serverConfig);
+    this.server = new Websocket.WebSocketServer({ server: this.apiServer });
   }
 
   createBitStampConnection() {

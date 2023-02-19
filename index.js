@@ -15,9 +15,9 @@ function handleQuit(wsServer) {
   });
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3566;
 const apiServer = new ApiServer(PORT);
-const wsServer = new WsServer();
+const wsServer = new WsServer(apiServer.server);
 
 const handleQuitOfServer = handleQuit.bind(apiServer, wsServer);
 process.on('SIGINT', handleQuitOfServer);
